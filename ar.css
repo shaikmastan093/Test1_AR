@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 :root {
   --primary: #547c23;
   --white: #ffffff;
   --black: #000000;
 }
+
 * {
   padding: 0;
   margin: 0;
@@ -11,11 +13,13 @@
   font-family: "Montserrat", serif;
   font-optical-sizing: auto;
 }
+
 h4,
 h5,
 h6 {
   margin: 0;
 }
+
 #confetti-canvas {
   position: absolute !important;
   top: 0 !important;
@@ -24,6 +28,7 @@ h6 {
   height: 100% !important;
   z-index: 9999 !important;
 }
+
 .container {
   overflow: hidden;
   position: absolute;
@@ -118,7 +123,7 @@ h6 {
   /* border: 2px solid var(--white); */
   border-radius: 14px;
   overflow: hidden;
-  z-index: 998;
+  z-index: 9999;
   display: none;
 }
 
@@ -193,6 +198,7 @@ h6 {
   background-color: #ffffff;
   border-radius: 50%;
 }
+
 .active_circle {
   /* transform: scale(1.6) !important; */
   box-shadow: 0 0 8px #ffffff;
@@ -211,6 +217,7 @@ h6 {
   background-color: rgb(255, 136, 136) !important;
   animation: error 0.03s linear 6 alternate;
 }
+
 .success {
   background-color: rgb(156 229 104) !important;
 }
@@ -219,9 +226,11 @@ h6 {
 .finish {
   display: none !important;
 }
+
 .enabled {
   display: block !important;
 }
+
 .diabled {
   display: none !important;
 }
@@ -255,13 +264,44 @@ h6 {
   margin: 10px;
 }
 
+.tapParent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.tap {
+  width: 120px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  position: absolute;
+  z-index: 999;
+  transform: translateX(-50%, -50%);
+}
+
+.tap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
 @keyframes error {
   0% {
     transform: translate(-10px);
   }
+
   50% {
     transform: translate(0);
   }
+
   100% {
     transform: translate(10px);
   }
@@ -271,6 +311,7 @@ h6 {
   0% {
     transform: rotate(0deg) scale(1.8);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -280,15 +321,19 @@ h6 {
   0% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-5px) rotate(-2deg);
   }
+
   50% {
     transform: translateX(5px) rotate(2deg);
   }
+
   75% {
     transform: translateX(-5px) rotate(-2deg);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -354,15 +399,19 @@ h6 {
   0% {
     transform: translate(0);
   }
+
   15% {
     transform: translateX(100px);
   }
+
   30% {
     transform: translateX(-110px);
   }
+
   46% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -372,10 +421,12 @@ h6 {
   .homeScreen {
     background-image: url(./assets/img/leaf.png);
   }
+
   .main {
     width: 80%;
     height: auto;
   }
+
   .main_menu .card {
     flex: 1 1 200px;
     height: auto;
@@ -383,6 +434,7 @@ h6 {
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
+
   .card_one,
   .card_two {
     width: auto;
@@ -391,6 +443,7 @@ h6 {
     border-radius: 12px;
     word-wrap: break-word;
   }
+
   .text-body-content {
     font-size: 2vw !important;
     font-weight: 600 !important;
@@ -407,9 +460,10 @@ h6 {
   .glass {
     font-size: 4.4vw;
   }
+
   .scan-buttons img {
-    width: 50px !important;
-    height: 50px !important;
+    width: 70px !important;
+    /* height: 70px !important; */
   }
 }
 
@@ -419,10 +473,12 @@ h6 {
     min-height: 600px;
     height: auto;
   }
+
   .text-body-content {
     font-size: 2.4vw !important;
   }
 }
+
 /* Ms Subba Lakshmi */
 body {
   font-family: Arial, sans-serif;
@@ -435,43 +491,52 @@ body {
   align-items: center;
   height: 100vh;
 }
+
 .profile {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
+
 .profile-img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin-right: 15px;
 }
+
 .profile-info h2 {
   font-size: 18px;
   margin: 0;
 }
+
 .profile-info p {
   font-size: 14px;
   color: #aaa;
 }
+
 .now-playing {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
+
 .now-playing-info h3 {
   font-size: 18px;
   margin: 0;
 }
+
 .now-playing-info p {
   font-size: 14px;
   color: #aaa;
 }
+
 .playlist {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .playlist li {
   display: flex;
   align-items: center;
@@ -484,23 +549,29 @@ body {
   transition: background-color 0.3s;
   align-items: left;
 }
+
 .playlist li:hover {
-  background-color: #1db954; /* Spotify Green */
+  background-color: #1db954;
+  /* Spotify Green */
 }
+
 .playlist-img {
   width: 50px;
   height: 50px;
   border-radius: 5px;
   margin-right: 10px;
 }
+
 .song-info h4 {
   margin: 0;
   font-size: 16px;
 }
+
 .song-info p {
   margin: 0;
   color: #aaa;
 }
+
 .playPauseBtn {
   background: none;
   border: none;
@@ -509,6 +580,7 @@ body {
   cursor: pointer;
   margin-left: auto;
 }
+
 .control-btn:hover {
   background-color: #1ed760;
 }
@@ -516,10 +588,17 @@ body {
 /* Responsive Dialog Box */
 .dialog-box {
   display: none;
-  position: fixed;
-  top: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertically center */
+  position: absolute;
+  left: 1;
+  right: 1;
+  top: 1;
+  bottom: 1;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 860px;
   height: auto;
   background-color: rgba(247, 247, 247, 0.507);
@@ -530,6 +609,7 @@ body {
   text-align: center;
   border-radius: 10px;
 }
+
 .dialog-box img,
 .dialog-box video {
   width: 100%;
@@ -537,11 +617,13 @@ body {
   object-fit: contain;
   border-radius: 10px;
 }
+
 .dialog-box p {
   font-size: 16px;
   margin: 10px 0;
   word-wrap: break-word;
 }
+
 .close-btn {
   background: red;
   color: white;
@@ -552,6 +634,7 @@ body {
   font-size: 14px;
   width: 50%;
 }
+
 .close-btn:hover {
   background: darkred;
 }
@@ -562,7 +645,31 @@ body {
     width: 95%;
     max-width: 320px;
   }
+
   .dialog-box p {
     font-size: 14px;
   }
+}
+
+.portrait {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(0%) rotate(0deg);
+  max-width: 90%;
+  display: flex;
+  gap: 20px;
+  z-index: 999;
+}
+ 
+.landscape {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(0%) rotate(0deg);
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 999;
 }
