@@ -166,7 +166,24 @@
       background-color: rgba(0, 0, 0, 0) !important;
     }
 
-   
+   .tapParent {
+  display: none;             /* hidden by default */
+  position: absolute;        /* centered */
+  top: 50%;                  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  z-index: 9999;
+  width: auto;               /* only as big as content */
+  height: auto;              /* only as big as content */
+  cursor: pointer;           /* clickable */
+}
+
+.tap img {
+  width: 100px;              /* finger gif size */
+  height: auto;
+}
+
 
 
   </style>
