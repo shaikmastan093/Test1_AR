@@ -460,7 +460,6 @@ AFRAME.registerComponent("play-audio", {
           .play()
           .then(() => {
             if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-              console.log("Audio started on iPhone", sound.currentTime);
               tap.style.display = "none";
               tap.style.backgroundColor = "transparent";
             }
@@ -476,7 +475,6 @@ AFRAME.registerComponent("play-audio", {
     });
 
     sound.onended = () => {
-      testSong = null;
       // nothing needed for subtitles anymore
     };
 
@@ -502,7 +500,7 @@ tap.addEventListener("click", () => {
         tap.style.display = "none";
       }
     });
-    console.log("Resumed audio at", testSong.currentTime);
+    console.log("kottikottikotti", testSong.currentTime);
   }
 });
 
