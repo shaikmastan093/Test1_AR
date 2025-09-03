@@ -5,11 +5,10 @@ const finish = document.querySelector(".finish");
 const circleParent = document.querySelector(".circle_parent");
 const question_title = document.querySelector(".question");
 const scoreResult = document.querySelector(".score");
-const tap = document.querySelector(".tapParent");
 const applause = new Audio("./assets/sounds/applause.wav");
+const tap = document.querySelector(".tapParent");
 let currentQuestion = 0;
 let score = 0;
-let isDialogOpen = false;
 let questions = [
   {
     question: "Who is known as the 'Father of the Sitar'?",
@@ -78,21 +77,7 @@ const count = 200,
   defaultsOne = {
     origin: { y: 0.7 },
   };
-
-let testSong;
-let subtitleInterval;
-let subtitles = null;
-let currentTargetImg;
-
 function showDialog(imageSrc, videoSrc, textContent) {
-  isDialogOpen = true;
-
-  if (testSong) {
-    testSong.pause();
-    testSong.currentTime = 0;
-    clearInterval(subtitleInterval);
-  }
-
   glassModal.style.display = "none";
   let imageElement = document.getElementById("dialogImage");
   let videoElement = document.getElementById("dialogVideo");
@@ -128,35 +113,6 @@ function showDialog(imageSrc, videoSrc, textContent) {
   document.getElementById("dialogBox").style.display = "block";
 }
 
-const closeModal = (event) => {
-  isDialogOpen = false;
-  if (testSong) {
-    testSong.play();
-
-    if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-      subtitleInterval = setInterval(() => {
-        showSubtitle(testSong.currentTime);
-      }, 300);
-    }
-
-  }
-  let videoElement = document.getElementById("dialogVideo");
-  switch (event) {
-    case "quest":
-      glassModal.style.display = "none";
-
-      break;
-    case "video":
-      dialogbox.style.display = "none";
-      videoElement.currentTime = 0;
-      videoElement.pause();
-      break;
-
-    default:
-      break;
-  }
-};
-
 function closeDialog() {
   document.getElementById("dialogBox").style.display = "none";
 
@@ -186,14 +142,6 @@ const circle = document.querySelectorAll(".circle_status");
 loadQuestion();
 
 const openQuiz = () => {
-  isDialogOpen = true;
-
-  if (testSong) {
-    testSong.pause();
-    testSong.currentTime = 0;
-    clearInterval(subtitleInterval);
-  }
-
   let videoElement = document.getElementById("dialogVideo");
   videoElement.currentTime = 0;
   videoElement.pause();
@@ -314,6 +262,24 @@ const finished = () => {
   closeModal("quest");
 };
 
+const closeModal = (event) => {
+  let videoElement = document.getElementById("dialogVideo");
+  switch (event) {
+    case "quest":
+      glassModal.style.display = "none";
+
+      break;
+    case "video":
+      dialogbox.style.display = "none";
+      videoElement.currentTime = 0;
+      videoElement.pause();
+      break;
+
+    default:
+      break;
+  }
+};
+
 const resetQuiz = () => {
   // Reset the current question index and score
   currentQuestion = 0;
@@ -376,134 +342,3 @@ const fireWorksAnimation = () => {
     );
   }, 250);
 };
-
-// document.addEventListener("DOMContentLoaded", () => {
-const assets = document.getElementById("assets");
-
-const characters = [
-  { char: `Thabela and dance `, count: 7 },
-  { char: `sitar `, count: 3 },
-  { char: `ms `, count: 5 },
-  { char: `ag `, count: 3 },
-  { char: `arch `, count: 3 },
-  { char: `san `, count: 7 },
-];
-
-const frameSources = {};
-
-characters.forEach(({ char, count }) => {
-  frameSources[char] = [];
-  for (let i = 0; i < count; i++) {
-    const img = document.createElement("img");
-    if (!img.src) {
-      img.src = `./animate/${char}${i + 1}.png`;
-    }
-    const imgId = `${char.trim().replace(/\s+/g, "-")}_${i + 1}`;
-    img.setAttribute("id", imgId);
-    img.setAttribute("src", `./animate/${char}${i + 1}.png`);
-    assets.appendChild(img);
-    frameSources[char].push(`#${imgId}`);
-  }
-});
-
-const targets = [
-  { targetId: "target0", imageId: "anim0", character: "Thabela and dance " },
-  { targetId: "target1", imageId: "anim1", character: "sitar " },
-  { targetId: "target2", imageId: "anim2", character: "ms " },
-  { targetId: "target4", imageId: "anim4", character: "ag " },
-  { targetId: "target5", imageId: "anim5", character: "arch " },
-  { targetId: "target6", imageId: "anim6", character: "san " },
-];
-
-targets.forEach(({ targetId, imageId, character }) => {
-  const target = document.getElementById(targetId);
-  const plane = document.getElementById(imageId);
-  const frames = frameSources[character];
-  let frameIndex = 0;
-  let animationInterval;
-  let lostTimeout;
-
-  target.addEventListener("targetFound", () => {
-    console.log("Target Found!");
-    clearTimeout(lostTimeout);
-    frameIndex = 0;
-    animationInterval = setInterval(() => {
-      plane.setAttribute("src", frames[frameIndex]);
-      frameIndex = (frameIndex + 1) % frames.length;
-    }, 200);
-  });
-
-  target.addEventListener("targetLost", () => {
-    console.log("Cleaning up animation due to lost target.");
-    clearInterval(animationInterval);
-    // plane.setAttribute("src", "");
-  });
-});
-// });
-
-// ⛔ Removed showSubtitle() and subtitle handling
-
-AFRAME.registerComponent("play-audio", {
-  schema: {
-    sound: { type: "selector" },
-    subtitles: { type: "asset" }, // kept for compatibility, but unused
-  },
-
-  init: function () {
-    const entity = this.el;
-    const sound = this.data.sound;
-
-    entity.addEventListener("targetFound", (event) => {
-      currentTargetImg = event;
-      if (!isDialogOpen) {
-        sound
-          .play()
-          .then(() => {
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-              console.log("Audio started on iPhone", sound.currentTime);
-              tap.style.display = "none";
-              tap.style.backgroundColor = "transparent";
-            }
-          })
-          .catch((e) => {
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-              tap.style.display = "flex";
-              tap.style.backgroundColor = "#4d4d4dbb";
-            }
-          });
-        testSong = sound;
-      }
-    });
-
-    sound.onended = () => {
-      testSong = null;
-      // nothing needed for subtitles anymore
-    };
-
-    entity.addEventListener("targetLost", () => {
-      console.log("Target Lost! Stopping audio...");
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        tap.style.backgroundColor = "transparent";
-        tap.style.display = "none";
-      }
-      testSong = null;
-      sound.pause();
-      sound.currentTime = 0;
-      isAudiPlaying = false;
-    });
-  },
-});
-
-tap.addEventListener("click", () => {
-  if (testSong) {
-    testSong.play().then(() => {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        tap.style.backgroundColor = "transparent";
-        tap.style.display = "none";
-      }
-    });
-    console.log("Resumed audio at", testSong.currentTime);
-  }
-});
-
-window.addEventListener("deviceorientation", handleOrientation, true);
